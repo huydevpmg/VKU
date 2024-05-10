@@ -5,10 +5,10 @@ import com.dacs.vku.domain.model.NotiItem
 import com.dacs.vku.domain.repository.DaoTaoRepository
 import kotlinx.coroutines.flow.Flow
 
-class GetNoti(
+class GetNotiDaoTao(
     val notificationRepository: DaoTaoRepository
 ) {
     operator fun invoke(): Flow<PagingData<NotiItem>> {
-        return notificationRepository.getNoti()
+        return notificationRepository.getNotiDaoTao()
     }
 }

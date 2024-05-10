@@ -6,5 +6,10 @@ import kotlinx.coroutines.flow.Flow
 
 
 interface DaoTaoRepository {
-    fun getNoti(): Flow<PagingData<NotiItem>>
+
+    fun getNotiDaoTao(): Flow<PagingData<NotiItem>>
+
+    fun getNotiCTSV(): Flow<PagingData<NotiItem>>
+    fun getNotiKHTC(): Flow<PagingData<NotiItem>>
+    fun getNotiKTDBCL(): Flow<PagingData<NotiItem>>
 }

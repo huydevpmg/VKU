@@ -1,8 +1,6 @@
-package com.dacs.vku.presentation.notification
+package com.dacs.vku.presentation.notificationDBCLKT
 
 import androidx.compose.foundation.ExperimentalFoundationApi
-import androidx.compose.foundation.Image
-import androidx.compose.foundation.basicMarquee
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
@@ -11,9 +9,7 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.statusBarsPadding
-import androidx.compose.foundation.layout.width
 import androidx.compose.material3.Icon
-import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.derivedStateOf
 import androidx.compose.runtime.getValue
@@ -21,27 +17,20 @@ import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.painterResource
-import androidx.compose.ui.tooling.preview.Preview
-import androidx.compose.ui.unit.dp
-import androidx.compose.ui.unit.sp
-import androidx.navigation.NavController
 import androidx.paging.compose.LazyPagingItems
 import com.dacs.vku.R
 import com.dacs.vku.domain.model.NotiItem
 import com.dacs.vku.presentation.Dimension.BigIconSize
 import com.dacs.vku.presentation.Dimension.MediumPadding1
-import com.dacs.vku.presentation.Dimension.SmallIconSize
 import com.dacs.vku.presentation.common.ArticlesList
 import com.dacs.vku.presentation.common.SearchBar
-import com.dacs.vku.ui.theme.VKU
 
 
 @OptIn(ExperimentalFoundationApi::class)
 @Composable
 fun NotiScreen(
     notis: LazyPagingItems<NotiItem>,
-    navigateToSearch: () -> Unit,
-    navigateToDetails: (NotiItem) -> Unit
+    navigate:(String) -> Unit
 ) {
 
     val titles by remember {
@@ -77,7 +66,10 @@ fun NotiScreen(
             readOnly = true,
             onValueChange = {},
             onSearch = {},
-            onClick = navigateToSearch
+            onClick =   {
+
+            }
+
         )
 
         Spacer(modifier = Modifier.height(MediumPadding1))
@@ -86,7 +78,9 @@ fun NotiScreen(
         ArticlesList(
             modifier = Modifier.padding(horizontal = MediumPadding1),
             notis = notis,
-            onClick = navigateToDetails
+            onClick = {
+
+            }
         )
     }
 }

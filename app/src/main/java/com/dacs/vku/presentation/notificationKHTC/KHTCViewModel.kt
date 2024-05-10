@@ -1,4 +1,4 @@
-package com.dacs.vku.presentation.notification
+package com.dacs.vku.presentation.notificationKHTC
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
@@ -9,8 +9,8 @@ import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
 
 @HiltViewModel
-class NotificationViewModel @Inject constructor(
+class KHTCViewModel @Inject constructor(
     private val notiUseCases: NotiUseCases
 ):ViewModel(){
-    val noti = notiUseCases.getNoti().cachedIn(viewModelScope)
+    val noti = notiUseCases.getNotiKHTC().cachedIn(viewModelScope)
 }

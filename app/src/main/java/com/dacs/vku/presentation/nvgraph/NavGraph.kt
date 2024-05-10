@@ -1,18 +1,16 @@
 package com.dacs.vku.presentation.nvgraph
 
+//import com.dacs.vku.presentation.notification.NotificationListScreen
+//import com.dacs.vku.presentation.notification.NotificationViewModel
 import androidx.compose.runtime.Composable
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import androidx.navigation.navigation
-import androidx.paging.compose.collectAsLazyPagingItems
-import com.dacs.vku.presentation.notification.NotiScreen
-import com.dacs.vku.presentation.notification.NotificationViewModel
-//import com.dacs.vku.presentation.notification.NotificationListScreen
-//import com.dacs.vku.presentation.notification.NotificationViewModel
 import com.dacs.vku.presentation.onboarding.OnBoardingScreen
 import com.dacs.vku.presentation.onboarding.OnBoardingViewModel
+import com.loc.newsapp.presentation.news_navigator.NewsNavigator
 
 @Composable
 fun NavGraph(
@@ -43,9 +41,7 @@ fun NavGraph(
             composable(
                 route = Route.DaotaoScreen.route
             ) {
-                val viewModel: NotificationViewModel = hiltViewModel()
-                val notis = viewModel.noti.collectAsLazyPagingItems()
-                NotiScreen(notis = notis, navigateToSearch = { /*TODO*/ }, navigateToDetails ={} )
+                NewsNavigator()
             }
         }
     }

@@ -1,11 +1,11 @@
-package com.dacs.vku.data.remote.a_daotao
+package com.dacs.vku.data.remote.a_ktdbcl
 
 import androidx.paging.PagingSource
 import androidx.paging.PagingState
 import com.dacs.vku.data.remote.NotiApi
 import com.dacs.vku.domain.model.NotiItem
 
-class NotificationDaoTaoPagingSource(private val notiApi: NotiApi) : PagingSource<Int, NotiItem>() {
+class NotificationKTDBCLPagingSource(private val notiApi: NotiApi) : PagingSource<Int, NotiItem>() {
     override fun getRefreshKey(state: PagingState<Int, NotiItem>): Int? {
             TODO("Not yet implemented")
     }
@@ -13,9 +13,9 @@ class NotificationDaoTaoPagingSource(private val notiApi: NotiApi) : PagingSourc
     override suspend fun load(params: LoadParams<Int>): LoadResult<Int, NotiItem> {
         return try {
             val nextPageNumber = params.key ?: 1
-            val notificationsDaoTao = notiApi.getNotificationsDaotao()
+            val notificationsKTDBCL = notiApi.getNotificationsKTDBCL()
             LoadResult.Page(
-                data = notificationsDaoTao,
+                data = notificationsKTDBCL,
                 prevKey = null,
                 nextKey = nextPageNumber + 1
             )

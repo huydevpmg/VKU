@@ -9,7 +9,10 @@ import com.dacs.vku.domain.repository.DaoTaoRepository
 import com.dacs.vku.domain.usecases.app_entry.AppEntryUseCases
 import com.dacs.vku.domain.usecases.app_entry.ReadAppEntry
 import com.dacs.vku.domain.usecases.app_entry.SaveAppEntry
-import com.dacs.vku.domain.usecases.notification.GetNoti
+import com.dacs.vku.domain.usecases.notification.GetNotiCTSV
+import com.dacs.vku.domain.usecases.notification.GetNotiDaoTao
+import com.dacs.vku.domain.usecases.notification.GetNotiKHTC
+import com.dacs.vku.domain.usecases.notification.GetNotiKTDBCL
 import com.dacs.vku.domain.usecases.notification.NotiUseCases
 import com.dacs.vku.util.Constants.BASE_URL
 import dagger.Module
@@ -57,7 +60,10 @@ object AppModule {
     @Singleton
     fun provideNotiUseCases(notificationRepository: DaoTaoRepository): NotiUseCases{
         return NotiUseCases(
-            getNoti = GetNoti(notificationRepository)
+            getNotiDaoTao = GetNotiDaoTao(notificationRepository),
+            getNotiCTSV = GetNotiCTSV(notificationRepository),
+            getNotiKHTC = GetNotiKHTC(notificationRepository),
+            getNotiKTDBCL =  GetNotiKTDBCL(notificationRepository)
         )
     }
 
