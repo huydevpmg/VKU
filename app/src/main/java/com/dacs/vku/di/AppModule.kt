@@ -2,11 +2,16 @@ package com.dacs.vku.di
 
 import android.app.Application
 import com.dacs.vku.data.manager.LocalUserManagerImplementation
-import com.dacs.vku.data.remote.SchoolAPI
+import com.dacs.vku.data.manager.NotificationRepositoryImpl
+import com.dacs.vku.data.remote.NotiApi
 import com.dacs.vku.domain.manager.LocalUserManager
+import com.dacs.vku.domain.repository.DaoTaoRepository
 import com.dacs.vku.domain.usecases.app_entry.AppEntryUseCases
 import com.dacs.vku.domain.usecases.app_entry.ReadAppEntry
 import com.dacs.vku.domain.usecases.app_entry.SaveAppEntry
+import com.dacs.vku.domain.usecases.notification.GetNoti
+import com.dacs.vku.domain.usecases.notification.NotiUseCases
+import com.dacs.vku.util.Constants.BASE_URL
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -18,32 +23,44 @@ import javax.inject.Singleton
 @Module
 @InstallIn(SingletonComponent::class)
 object AppModule {
-//mỗi single ton thể hienej mỗi dependencies khác nhau
+    //mỗi single ton thể hienej mỗi dependencies khác nhau
     @Provides
     @Singleton
     fun provideLocalUserManger(
-        application: Application
+        application: Application,
     ): LocalUserManager = LocalUserManagerImplementation(context = application)
 
 
     @Provides
     @Singleton
     fun provideAppEntryUseCases(
-        localUserManger: LocalUserManager
+        localUserManger: LocalUserManager,
     ): AppEntryUseCases = AppEntryUseCases(
         readAppEntry = ReadAppEntry(localUserManger),
         saveAppEntry = SaveAppEntry(localUserManger)
     )
     @Provides
     @Singleton
-    fun provideRetrofit(): Retrofit =
-        Retrofit.Builder()
-            .baseUrl("http://localhost:5000/states")
+    fun provideNotiApi(): NotiApi {
+        return Retrofit.Builder()
+            .baseUrl(BASE_URL)
             .addConverterFactory(GsonConverterFactory.create())
             .build()
+            .create(NotiApi::class.java)
+    }
 
     @Provides
     @Singleton
-    fun provideSchoolAPI(retrofit: Retrofit): SchoolAPI =
-        retrofit.create(SchoolAPI::class.java)
+    fun provideNotiRepository(notiApi: NotiApi): DaoTaoRepository = NotificationRepositoryImpl(notiApi)
+
+    @Provides
+    @Singleton
+    fun provideNotiUseCases(notificationRepository: DaoTaoRepository): NotiUseCases{
+        return NotiUseCases(
+            getNoti = GetNoti(notificationRepository)
+        )
+    }
+
+
+
 }

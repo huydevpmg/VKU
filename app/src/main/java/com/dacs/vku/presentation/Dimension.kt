@@ -14,4 +14,17 @@ object Dimension {
     val Heading3 = 15.sp
     val TextArea = 15.sp
 
+    val ExtraSmallPadding = 3.dp
+    val ExtraSmallPadding2 = 6.dp
+    val MediumPadding3 = 40.dp
+
+    val SmallIconSize = 11.dp
+    val IconSize = 20.dp
+
+    val BigIconSize = 100.dp
+
+    val ArticleCardSize = 96.dp
+
+    val ArticleImageHeight = 248.dp
+
 }

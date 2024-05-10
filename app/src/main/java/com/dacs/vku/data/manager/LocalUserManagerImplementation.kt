@@ -30,6 +30,6 @@ class LocalUserManagerImplementation(
 }
 private val Context.dataStore: DataStore<Preferences> by preferencesDataStore(name = USER_SETTING)
 
-private object PreferencesKeys{
+object PreferencesKeys{
     val APP_ENTRY = booleanPreferencesKey(name = Constants.APP_ENTRY)
 }

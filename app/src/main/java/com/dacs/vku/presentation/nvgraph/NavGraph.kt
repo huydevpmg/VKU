@@ -1,14 +1,16 @@
 package com.dacs.vku.presentation.nvgraph
 
-import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.hilt.navigation.compose.hiltViewModel
-import androidx.navigation.NavDestination
-import androidx.navigation.NavGraph
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import androidx.navigation.navigation
+import androidx.paging.compose.collectAsLazyPagingItems
+import com.dacs.vku.presentation.notification.NotiScreen
+import com.dacs.vku.presentation.notification.NotificationViewModel
+//import com.dacs.vku.presentation.notification.NotificationListScreen
+//import com.dacs.vku.presentation.notification.NotificationViewModel
 import com.dacs.vku.presentation.onboarding.OnBoardingScreen
 import com.dacs.vku.presentation.onboarding.OnBoardingViewModel
 
@@ -32,20 +34,19 @@ fun NavGraph(
 
                 )
             }
-
-
         }
 
         navigation(
             route = Route.VKUNavigation.route,
-            startDestination = Route.VKUNavigatorScreen.route
-        ){
+            startDestination = Route.DaotaoScreen.route
+        ) {
             composable(
-                route= Route.VKUNavigatorScreen.route
+                route = Route.DaotaoScreen.route
             ) {
-                Text(text = "VKU Navigator Screen")
+                val viewModel: NotificationViewModel = hiltViewModel()
+                val notis = viewModel.noti.collectAsLazyPagingItems()
+                NotiScreen(notis = notis, navigateToSearch = { /*TODO*/ }, navigateToDetails ={} )
             }
-
         }
     }
 }

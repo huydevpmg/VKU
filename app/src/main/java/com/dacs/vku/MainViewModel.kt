@@ -17,6 +17,7 @@ import javax.inject.Inject
 class MainViewModel @Inject constructor(
     private val appEntryUseCases: AppEntryUseCases
 ) : ViewModel() {
+
     private val _splashCondition = mutableStateOf(true)
     var splashCondition: State<Boolean> = _splashCondition
 
@@ -31,6 +32,7 @@ class MainViewModel @Inject constructor(
                 startDestination = Route.VKUNavigation.route
             } else {
                 startDestination = Route.AppStartNavigation.route
+
             }
 
             delay(300)
